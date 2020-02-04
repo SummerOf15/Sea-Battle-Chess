@@ -2,7 +2,7 @@ package Ships;
 
 public class BattleShip extends AbstractShip {
 
-    BattleShip(String nom){
+    BattleShip(char nom){
         super(nom, NavireType.BATTALESHIP,4, Orientation.EAST);
     }
 }
