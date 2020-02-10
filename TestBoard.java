@@ -5,7 +5,7 @@ public class TestBoard {
         Board board=new Board("A");
         Submarine submarine=new Submarine('S');
         Destroyer destroyer=new Destroyer('D');
-        board.putShip(submarine,8,3);
+        board.putShip(submarine,4,4);
         board.putShip(destroyer,1,3);
         board.setHit(true,4,4);
         board.print();

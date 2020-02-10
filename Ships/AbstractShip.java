@@ -5,6 +5,7 @@ public abstract class AbstractShip {
     private char navireNom;
     private int navireLength;
     private Orientation navireOri;
+    private int strikeCount;
 
     AbstractShip(char nom, NavireType type, int length, Orientation ori){
         navireNom=nom;
@@ -26,4 +27,12 @@ public abstract class AbstractShip {
     }
 
     public char getNavireNom() { return navireNom; }
+
+    public void addStrike(){
+        strikeCount++;
+    }
+
+    public boolean isSunk(){
+        return (strikeCount>=navireLength);
+    }
 }
