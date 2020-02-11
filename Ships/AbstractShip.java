@@ -12,6 +12,7 @@ public abstract class AbstractShip {
         navireType=type;
         navireLength=length;
         navireOri=ori;
+        strikeCount=0;
     }
 
     public int getNavireLength(){
