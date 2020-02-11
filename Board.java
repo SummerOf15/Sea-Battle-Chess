@@ -78,7 +78,7 @@ public class Board implements IBoard{
         }
         catch (Exception e)
         {
-            System.out.println(e);
+            System.out.println("put ship"+ship.getNavireNom()+" failed");
         }
     }
 
@@ -113,7 +113,7 @@ public class Board implements IBoard{
             // if there is a ship
             hit=Hit.STRIKE;
             chessBoard[y][x].getShip().addStrike();
-            System.out.print("strike:"+chessBoard[y][x].getShip().getStrike());
+//            System.out.print("strike:"+chessBoard[y][x].getShip().getStrike());
             // when the ship is totally destroyed
             if(chessBoard[y][x].getShip().isSunk()){
                 hit=Hit.fromInt(chessBoard[y][x].getShip().getNavireType().getTypeValue());

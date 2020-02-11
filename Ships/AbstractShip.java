@@ -14,6 +14,9 @@ public abstract class AbstractShip {
         navireOri=ori;
         strikeCount=0;
     }
+    public void setNavireOri(Orientation ori){
+        navireOri=ori;
+    }
 
     public int getNavireLength(){
         return navireLength;
