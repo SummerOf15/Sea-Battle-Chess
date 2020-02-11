@@ -33,6 +33,10 @@ public abstract class AbstractShip {
         strikeCount++;
     }
 
+    public int getStrike(){
+        return strikeCount;
+    }
+
     public boolean isSunk(){
         return (strikeCount>=navireLength);
     }

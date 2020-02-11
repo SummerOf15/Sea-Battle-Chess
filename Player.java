@@ -47,9 +47,18 @@ public class Player {
         } while (!done);
     }
 
+    /**
+     * send hit to opponent board
+     * @param coords must have the length of 2, store the x and y
+     * @return the last touched hit
+     */
     public Hit sendHit(int[] coords) {
         boolean done=false;
         Hit hit = null;
+
+        if (coords == null || coords.length < 2) {
+            throw new IllegalArgumentException("must provide an initialized array of size 2");
+        }
 
         do {
             System.out.println("où frapper?");
@@ -58,11 +67,12 @@ public class Player {
             hit=opponentBoard.sendHit(hitInput.x,hitInput.y);
             // TODO : Game expects sendHit to return BOTH hit result & hit coords.
             // return hit is obvious. But how to return coords at the same time ?
-            if(hit.getValue()>0){
+            if(hit!=Hit.MISS){
+                coords[0]=hitInput.x;
+                coords[1]=hitInput.y;
                 done=true;
             }
         } while (!done);
-
         return hit;
     }
 

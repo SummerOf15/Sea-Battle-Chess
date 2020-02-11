@@ -10,8 +10,9 @@ public class Board implements IBoard{
 
     Board(String nom){
         this.nom=nom;
-        chessBoard=new ShipState[10][10];
-        attack=new Hit[10][10];
+        length=10;
+        chessBoard=new ShipState[length][length];
+        attack=new Hit[length][length];
     }
     Board(String nom, int len){
         this.nom=nom;
@@ -90,18 +91,12 @@ public class Board implements IBoard{
     }
 
     public void setHit(boolean hit, int x, int y){
-        // if there is not ship
-        if(chessBoard[y][x]==null){
-            attack[y][x]=Hit.MISS;
+        // set where I have attacked
+        if(hit){
+            attack[y][x]=Hit.STRIKE;
         }
         else{
-            // if there is a ship
-            attack[y][x]=Hit.STRIKE;
-            chessBoard[y][x].getShip().addStrike();
-            // when the ship is totally destroyed
-            if(chessBoard[y][x].getShip().isSunk()){
-                attack[y][x]=Hit.fromInt(chessBoard[y][x].getShip().getNavireType().getTypeValue());
-            }
+            attack[y][x]=Hit.MISS;
         }
     }
     public Boolean getHit(int x, int y){
@@ -109,9 +104,23 @@ public class Board implements IBoard{
     }
 
     public Hit sendHit(int x, int y){
-        if(!getHit(x,y))
-            setHit(true,x,y);
-        return attack[y][x];
+        Hit hit;
+
+        if(chessBoard[y][x]==null){
+            hit=Hit.MISS;
+        }
+        else{
+            // if there is a ship
+            hit=Hit.STRIKE;
+            chessBoard[y][x].getShip().addStrike();
+            System.out.print("strike:"+chessBoard[y][x].getShip().getStrike());
+            // when the ship is totally destroyed
+            if(chessBoard[y][x].getShip().isSunk()){
+                hit=Hit.fromInt(chessBoard[y][x].getShip().getNavireType().getTypeValue());
+            }
+        }
+
+        return hit;
     }
 
     public void print(){
@@ -141,8 +150,8 @@ public class Board implements IBoard{
             for(int j=0;j<chessBoard[0].length;j++){
                 if(chessBoard[i][j]==null)
                     System.out.print(". ");
-                else if(chessBoard[i][j].getShip().isSunk())
-                    System.out.print(ColorFonts.ANSI_RED+chessBoard[i][j].getShip().getNavireNom()+" "+ColorFonts.ANSI_RESET);
+//                else if(chessBoard[i][j].getShip().isSunk())
+//                    System.out.print(ColorFonts.ANSI_RED+chessBoard[i][j].getShip().getNavireNom()+" "+ColorFonts.ANSI_RESET);
                 else
                     System.out.print(chessBoard[i][j].getShip().getNavireNom()+" ");
             }

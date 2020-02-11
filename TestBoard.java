@@ -1,5 +1,6 @@
 import Ships.*;
 
+
 public class TestBoard {
     public static void main(String [] args){
         Board board=new Board("A");
@@ -16,6 +17,6 @@ public class TestBoard {
         board.print();
         System.out.println("sunk:"+submarine.isSunk());
         System.out.println("sunk1:"+submarine1.isSunk());
-        System.out.println(board.hasShip(7,3));
+
     }
 }
