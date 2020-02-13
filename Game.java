@@ -69,32 +69,34 @@ public class Game {
             hit=player1.sendHit(coords);
             boolean strike = hit != Hit.MISS; // TODO set this hit on his board (b1)
             b1.setHit(strike,coords[0],coords[1]);
+
             done = updateScore();
             b1.print();
             System.out.println(makeHitMessage(false /* outgoing hit */, coords, hit));
 
             save();
 
-            if (!done && !strike) {
-                do {
-                    hit = Hit.MISS; // TODO player2 send a hit.
+            if (!done) {
 
-                    strike = hit != Hit.MISS;
-                    if (strike) {
-                        b1.print();
-                    }
-                    System.out.println(makeHitMessage(true /* incoming hit */, coords, hit));
-                    done = updateScore();
+                hit=player2.sendHit(coords);
+                strike = hit != Hit.MISS;
+//                    player2.board.setHit(strike,coords[0],coords[1]);
 
-                    if (!done) {
-                        save();
-                    }
-                } while (strike && !done);
+                if (strike) {
+                    b1.print();
+                }
+
+                System.out.println(makeHitMessage(true /* incoming hit */, coords, hit));
+                done = updateScore();
+
+                if (!done) {
+                    save();
+                }
             }
 
         } while (!done);
 
-        SAVE_FILE.delete();
+        System.out.println("delete "+SAVE_FILE.delete());
         System.out.println(String.format("joueur %d gagne", player1.lose ? 2 : 1));
         sin.close();
     }
@@ -113,6 +115,7 @@ public class Game {
             objectOutputStream.writeObject(player2);
             objectOutputStream.flush();
             objectOutputStream.close();
+            fileOutputStream.close();
             // TODO bonus 2 : serialize players
 
         } catch (IOException e) {
@@ -127,6 +130,7 @@ public class Game {
                 ObjectInputStream objectInputStream=new ObjectInputStream(new FileInputStream(SAVE_FILE));
                 player1=(Player)objectInputStream.readObject();
                 player2=(Player)objectInputStream.readObject();
+                objectInputStream.close();
                 return true;
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();

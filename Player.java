@@ -73,11 +73,11 @@ public class Player implements Serializable{
             board.setHit(hit!=Hit.MISS,hitInput.x,hitInput.y);
             // TODO : Game expects sendHit to return BOTH hit result & hit coords.
             // return hit is obvious. But how to return coords at the same time ?
-            if(hit!=Hit.MISS){
-                coords[0]=hitInput.x;
-                coords[1]=hitInput.y;
-                done=true;
-            }
+//            if(hit!=Hit.MISS){
+            coords[0]=hitInput.x;
+            coords[1]=hitInput.y;
+            done=true;
+//            }
         } while (!done);
         return hit;
     }

@@ -142,6 +142,7 @@ public class Board implements IBoard, Serializable {
 
     public void print(){
         char c0='A';
+        System.out.println(nom+":->");
         System.out.println("Frappes:");
         for(int k=0;k<attack[0].length;k++)
             System.out.print(" "+(char)((int)c0+k));
