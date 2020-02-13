@@ -1,20 +1,24 @@
 import Ships.AbstractShip;
 import Ships.Orientation;
-import sun.plugin2.util.ColorUtil;
 
-public class Board implements IBoard{
+import java.io.Serializable;
+
+public class Board implements IBoard, Serializable {
     private String nom;
     private ShipState[][] chessBoard;// les navires
     private Hit[][] attack;// les frappes
     private int length;
+    public boolean setDone;
 
     Board(String nom){
+        setDone=false;
         this.nom=nom;
-        length=10;
+        length=2;
         chessBoard=new ShipState[length][length];
         attack=new Hit[length][length];
     }
     Board(String nom, int len){
+        setDone=false;
         this.nom=nom;
         length=len;
         chessBoard=new ShipState[len][len];
@@ -26,60 +30,73 @@ public class Board implements IBoard{
     }
 
     public void putShip(AbstractShip ship, int x, int y){
+        setDone=false;
         int l=ship.getNavireLength();
         Orientation ori=ship.getNavireOri();
         try{
             switch (ori){
                 case EAST:{
-                    for(int i=l-1;i>=0;i--)
-                        if(!hasShip(x+i,y))
+                    for(int i=l-1;i>=0;i--){
+                        if(hasShip(x+i,y))
                         {
-                            chessBoard[y][x+i]=new ShipState();
-                            chessBoard[y][x+i].setShip(ship);
-                        }
-                        else
                             throw new Exception("already has battles");
+                        }
+                    }
+                    for(int i=l-1;i>=0;i--){
+                        chessBoard[y][x+i]=new ShipState();
+                        chessBoard[y][x+i].setShip(ship);
+                    }
+                    setDone=true;
                     break;
                 }
                 case WEST:{
                     for(int i=l-1;i>=0;i--)
-                        if(!hasShip(x-i,y))
+                        if(hasShip(x-i,y))
                         {
-                            chessBoard[y][x-i]=new ShipState();
-                            chessBoard[y][x-i].setShip(ship);
-                        }
-                        else
                             throw new Exception("already has battles");
+                        }
+                    for(int i=l-1;i>=0;i--){
+                        chessBoard[y][x-i]=new ShipState();
+                        chessBoard[y][x-i].setShip(ship);
+                    }
+                    setDone=true;
                     break;
                 }
                 case NORTH:{
                     for(int i=l-1;i>=0;i--)
-                        if(!hasShip(x,y-i))
+                        if(hasShip(x,y-i))
                         {
-                            chessBoard[y-i][x]=new ShipState();
-                            chessBoard[y-i][x].setShip(ship);
-                        }
-                        else
                             throw new Exception("already has battles");
+                        }
+                    for(int i=l-1;i>=0;i--){
+                        chessBoard[y-i][x]=new ShipState();
+                        chessBoard[y-i][x].setShip(ship);
+                    }
+                    setDone=true;
                     break;
                 }
                 case SOUTH:{
                     for(int i=l-1;i>=0;i--)
-                        if(!hasShip(x,y+i))
+                        if(hasShip(x,y+i))
                         {
-                            chessBoard[y+i][x]=new ShipState();
-                            chessBoard[y+i][x].setShip(ship);
-                        }
-                        else
                             throw new Exception("already has battles");
+                        }
+                    for(int i=l-1;i>=0;i--)
+                    {
+                        chessBoard[y+i][x]=new ShipState();
+                        chessBoard[y+i][x].setShip(ship);
+                    }
+                    setDone=true;
                     break;
                 }
             }
         }
         catch (Exception e)
         {
-            System.out.println("put ship"+ship.getNavireNom()+" failed");
+            System.out.println(e+",put ship "+ship.getNavireNom()+" failed");
+            setDone=false;
         }
+
     }
 
     public boolean hasShip(int x, int y){
@@ -130,7 +147,7 @@ public class Board implements IBoard{
             System.out.print(" "+(char)((int)c0+k));
         System.out.println();
         for(int i=0;i<attack.length;i++){
-            System.out.print(Integer.toString(i));
+            System.out.print(Integer.toString(i+1));
             for(Hit b:attack[i]){
                 if(b==null)
                     System.out.print(". ");
@@ -146,7 +163,7 @@ public class Board implements IBoard{
             System.out.print(" "+(char)((int)c0+k));
         System.out.println();
         for(int i=0;i<chessBoard.length;i++){
-            System.out.print(Integer.toString(i));
+            System.out.print(Integer.toString(i+1));
             for(int j=0;j<chessBoard[0].length;j++){
                 if(chessBoard[i][j]==null)
                     System.out.print(". ");

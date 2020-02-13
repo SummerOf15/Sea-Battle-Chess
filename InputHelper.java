@@ -1,3 +1,5 @@
+import Ships.Orientation;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -12,7 +14,7 @@ public final class InputHelper {
      * Classe ShipInput, interne à InputHelper
      */
     public static class ShipInput {
-        public String orientation;
+        public Orientation orientation;
         public int x;
         public int y;
     }
@@ -33,6 +35,7 @@ public final class InputHelper {
         Scanner sin = new Scanner(System.in);
         ShipInput res = new ShipInput();
         String[] validOrientations = {"n", "s", "e", "w"}; // North, South, East, West
+        Orientation[] oris = {Orientation.NORTH, Orientation.SOUTH, Orientation.EAST, Orientation.WEST}; // North, South, East, West
         boolean done = false;
 
         do {
@@ -40,10 +43,11 @@ public final class InputHelper {
                 String[] in = sin.nextLine().toLowerCase().split(" ");
                 if (in.length == 2) {
                     String coord = in[0];
-                    if (Arrays.asList(validOrientations).contains(in[1])) {
-                        res.orientation = in[1];
+                    int ind=Arrays.asList(validOrientations).indexOf(in[1]);
+                    if (ind>=0) {
+                        res.orientation = oris[ind];
                         res.x = coord.charAt(0) - 'a';
-                        res.y = Integer.parseInt(coord.substring(1, coord.length())) - 1;
+                        res.y = Integer.parseInt(coord.substring(1, coord.length()))-1;
                         done = true;
                     }
                 }
@@ -69,7 +73,7 @@ public final class InputHelper {
             try {
                 String coord = sin.nextLine().toLowerCase();
                 res.x = coord.charAt(0) - 'a';
-                res.y = Integer.parseInt(coord.substring(1, coord.length())) - 1;
+                res.y = Integer.parseInt(coord.substring(1, coord.length()))-1;
                 done = true;
             } catch (Exception e) {
                 // nop

@@ -1,6 +1,8 @@
 import Ships.AbstractShip;
 
-public class ShipState {
+import java.io.Serializable;
+
+public class ShipState implements Serializable {
     private AbstractShip ship;
     private boolean struck;
 

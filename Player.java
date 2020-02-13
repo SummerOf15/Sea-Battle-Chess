@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.List;
 import Ships.AbstractShip;
 
-public class Player {
+public class Player implements Serializable{
     /* **
      * Attributs
      */
@@ -36,13 +36,15 @@ public class Player {
             String msg = String.format("placer %d : %s(%d)", i + 1, s.getNavireNom(), s.getNavireLength());
             System.out.println(msg);
             InputHelper.ShipInput res = InputHelper.readShipInput();
-
+            s.setNavireOri(res.orientation);
             board.putShip(s,res.x,res.y);
+            if(board.setDone)
+            {
+                ++i;
+                done = i == ships.length;
 
-            ++i;
-            done = i == 5;
-
-            board.print();
+                board.print();
+            }
         } while (!done);
     }
 
@@ -63,6 +65,10 @@ public class Player {
             System.out.println("où frapper?");
             InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
             // TODO call sendHit on this.opponentBoard
+            // all user input is untrustworthy
+            if(hitInput.x<0 || hitInput.x>board.getSize()-1 || hitInput.y<0 || hitInput.y>board.getSize()-1)
+                continue;
+
             hit=opponentBoard.sendHit(hitInput.x,hitInput.y);
             board.setHit(hit!=Hit.MISS,hitInput.x,hitInput.y);
             // TODO : Game expects sendHit to return BOTH hit result & hit coords.

@@ -24,6 +24,7 @@ public class Game {
      * *** Constructeurs
      */
     public Game() {
+        sin=new Scanner(System.in);
     }
 
     public Game init() {
@@ -32,7 +33,9 @@ public class Game {
             System.out.println("entre ton nom:");
 
             // TODO use a scanner to read player name
-            String name=sin.nextLine();
+            String name="p1"; //default name
+            if(sin.hasNextLine())
+                name=sin.nextLine();
             // TODO init boards
             Board b1, b2;
             b1=new Board(name);// people
@@ -102,7 +105,14 @@ public class Game {
             // if (!SAVE_FILE.exists()) {
             // SAVE_FILE.getAbsoluteFile().getParentFile().mkdirs();
             // }
-
+            FileOutputStream fileOutputStream
+                    = new FileOutputStream(SAVE_FILE);
+            ObjectOutputStream objectOutputStream
+                    = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(player1);
+            objectOutputStream.writeObject(player2);
+            objectOutputStream.flush();
+            objectOutputStream.close();
             // TODO bonus 2 : serialize players
 
         } catch (IOException e) {
@@ -114,7 +124,9 @@ public class Game {
         if (SAVE_FILE.exists()) {
             try {
                 // TODO bonus 2 : deserialize players
-
+                ObjectInputStream objectInputStream=new ObjectInputStream(new FileInputStream(SAVE_FILE));
+                player1=(Player)objectInputStream.readObject();
+                player2=(Player)objectInputStream.readObject();
                 return true;
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -162,6 +174,7 @@ public class Game {
     }
 
     private static List<AbstractShip> createDefaultShips() {
-        return Arrays.asList(new AbstractShip[] { new Destroyer(), new Submarine(), new Submarine(), new BattleShip(), new AircraftCarrier() });
+//        return Arrays.asList(new AbstractShip[] { new Destroyer(), new Submarine(), new BattleShip(), new AircraftCarrier() });
+        return Arrays.asList(new AbstractShip[] { new Destroyer() });
     }
 }

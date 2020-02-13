@@ -2,6 +2,12 @@ import Ships.*;
 
 public class TestGame {
     public static void main(String args[]){
+        Game game=new Game();
+        game.init();
+        game.run();
+    }
+
+    public void example1(){
         Board board=new Board("p1");
         Board board1=new Board("p2");
         AbstractShip ships1[]=new AbstractShip[3];

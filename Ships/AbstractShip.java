@@ -1,6 +1,8 @@
 package Ships;
 
-public abstract class AbstractShip {
+import java.io.Serializable;
+
+public abstract class AbstractShip implements Serializable {
     private NavireType navireType;
     private char navireNom;
     private int navireLength;
