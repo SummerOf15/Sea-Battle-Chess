@@ -11,7 +11,6 @@ public class Player {
     protected int destroyedCount;
     protected AbstractShip[] ships;
     protected boolean lose;
-
     /* **
      * Constructeur
      */
@@ -65,6 +64,7 @@ public class Player {
             InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
             // TODO call sendHit on this.opponentBoard
             hit=opponentBoard.sendHit(hitInput.x,hitInput.y);
+            board.setHit(hit!=Hit.MISS,hitInput.x,hitInput.y);
             // TODO : Game expects sendHit to return BOTH hit result & hit coords.
             // return hit is obvious. But how to return coords at the same time ?
             if(hit!=Hit.MISS){

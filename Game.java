@@ -1,4 +1,7 @@
+import Ships.*;
+
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -29,12 +32,16 @@ public class Game {
             System.out.println("entre ton nom:");
 
             // TODO use a scanner to read player name
-
+            String name=sin.nextLine();
             // TODO init boards
             Board b1, b2;
-
+            b1=new Board(name);// people
+            b2=new Board("p2");// ai
             // TODO init this.player1 & this.player2
-
+            List<AbstractShip> ships1=createDefaultShips();
+            List<AbstractShip> ships2=createDefaultShips();
+            player1=new Player(b1,b2,ships1);
+            player2=new AIPlayer(b2,b1,ships2);
             b1.print();
             // place player ships
             player1.putShips();
@@ -55,9 +62,10 @@ public class Game {
         b1.print();
         boolean done;
         do {
-            hit = Hit.MISS; // TODO player1 send a hit
+            // TODO player1 send a hit
+            hit=player1.sendHit(coords);
             boolean strike = hit != Hit.MISS; // TODO set this hit on his board (b1)
-
+            b1.setHit(strike,coords[0],coords[1]);
             done = updateScore();
             b1.print();
             System.out.println(makeHitMessage(false /* outgoing hit */, coords, hit));
@@ -135,26 +143,25 @@ public class Game {
 
     private String makeHitMessage(boolean incoming, int[] coords, Hit hit) {
         String msg;
-        ColorUtil.Color color = ColorUtil.Color.RESET;
+        String color=ColorFonts.ANSI_RESET;
         switch (hit) {
         case MISS:
             msg = hit.toString();
             break;
-        case STIKE:
+        case STRIKE:
             msg = hit.toString();
-            color = ColorUtil.Color.RED;
+            color = ColorFonts.ANSI_RED;
             break;
         default:
             msg = hit.toString() + " coulé";
-            color = ColorUtil.Color.RED;
+            color = ColorFonts.ANSI_RED;
         }
         msg = String.format("%s Frappe en %c%d : %s", incoming ? "<=" : "=>", ((char) ('A' + coords[0])),
                 (coords[1] + 1), msg);
-        return ColorUtil.colorize(msg, color);
+        return color+msg+ColorFonts.ANSI_RESET;
     }
 
     private static List<AbstractShip> createDefaultShips() {
-        return Arrays.asList(new AbstractShip[] { new Destroyer(), new Submarine(), new Submarine(), new BattleShip(),
-                new Carrier() });
+        return Arrays.asList(new AbstractShip[] { new Destroyer(), new Submarine(), new Submarine(), new BattleShip(), new AircraftCarrier() });
     }
 }
