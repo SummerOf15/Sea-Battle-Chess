@@ -1,10 +1,9 @@
 package prog;
 
 import Ships.*;
-import prog.Player;
 
 import java.io.*;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +21,7 @@ public class Game {
     private Player player1;
     private Player player2;
     private Scanner sin;
-
+    private int len=10;
     /*
      * *** Constructeurs
      */
@@ -39,10 +38,16 @@ public class Game {
             String name="p1"; //default name
             if(sin.hasNextLine())
                 name=sin.nextLine();
-            // TODO init boards
+            System.out.println("entre la taille:");
+            if(sin.hasNextLine())
+                len=Integer.valueOf(sin.nextLine());
+            if (len<2){
+                System.out.println("invalid size, use default 10");
+                len=10;
+            }
             Board b1, b2;
-            b1=new Board(name);// people
-            b2=new Board("p2");// ai
+            b1=new Board(name,len);// people
+            b2=new Board("p2",len);// ai
             // TODO init this.player1 & this.player2
             List<AbstractShip> ships1=createDefaultShips();
             List<AbstractShip> ships2=createDefaultShips();
@@ -107,9 +112,9 @@ public class Game {
     private void save() {
         try {
             // TODO bonus 2 : uncomment
-            // if (!SAVE_FILE.exists()) {
-            // SAVE_FILE.getAbsoluteFile().getParentFile().mkdirs();
-            // }
+//             if (!SAVE_FILE.exists()) {
+//             SAVE_FILE.getAbsoluteFile().getParentFile().mkdirs();
+//             }
             FileOutputStream fileOutputStream
                     = new FileOutputStream(SAVE_FILE);
             ObjectOutputStream objectOutputStream

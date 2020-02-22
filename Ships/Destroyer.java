@@ -3,7 +3,7 @@ package Ships;
 public class Destroyer extends AbstractShip {
 
     public Destroyer(){
-        super('D',NavireType.DESTROYER,2,Orientation.EAST);
+        super('D',NavireType.DESTROYER,2,Orientation.EAST, 2);
     }
     public Destroyer(char nom, Orientation ori){
         super(nom,NavireType.DESTROYER,2,ori);

@@ -1,3 +1,4 @@
+package prog;
 import Ships.*;
 
 

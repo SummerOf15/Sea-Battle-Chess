@@ -1,9 +1,10 @@
 package Ships;
 
+
 public class BattleShip extends AbstractShip {
 
     public BattleShip(){
-        super('B', NavireType.BATTLESHIP,4, Orientation.EAST);
+        super('B', NavireType.BATTLESHIP,4, Orientation.EAST, 1);
     }
     public BattleShip(char nom, Orientation ori){
         super(nom, NavireType.BATTLESHIP,4, ori);

@@ -1,5 +1,7 @@
 package Ships;
 
+import javafx.scene.paint.Color;
+
 import java.io.Serializable;
 
 public abstract class AbstractShip implements Serializable {
@@ -8,6 +10,7 @@ public abstract class AbstractShip implements Serializable {
     private int navireLength;
     private Orientation navireOri;
     private int strikeCount;
+    private int navireColor;
 
     AbstractShip(char nom, NavireType type, int length, Orientation ori){
         navireNom=nom;
@@ -15,6 +18,14 @@ public abstract class AbstractShip implements Serializable {
         navireLength=length;
         navireOri=ori;
         strikeCount=0;
+    }
+    AbstractShip(char nom, NavireType type, int length, Orientation ori, int color){
+        navireNom=nom;
+        navireType=type;
+        navireLength=length;
+        navireOri=ori;
+        strikeCount=0;
+        navireColor=color;
     }
     public void setNavireOri(Orientation ori){
         navireOri=ori;
@@ -44,5 +55,9 @@ public abstract class AbstractShip implements Serializable {
 
     public boolean isSunk(){
         return (strikeCount>=navireLength);
+    }
+
+    public int getNavireColor(){
+        return navireColor;
     }
 }

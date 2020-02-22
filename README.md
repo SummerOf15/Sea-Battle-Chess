@@ -1,4 +1,8 @@
 # Sea-Battle-Chess
 A chess game implemented by JAVA
 
-processing
+There are two versions in this project:
+
+- game under console
+- game in GUI
+

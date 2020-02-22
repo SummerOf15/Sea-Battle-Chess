@@ -1,3 +1,5 @@
+package prog;
+
 import Ships.*;
 
 public class TestGame {

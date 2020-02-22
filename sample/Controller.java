@@ -183,7 +183,7 @@ public class Controller {
         boolean isDrawn=true;
         Orientation ori=ship.getNavireOri();
         int l=ship.getNavireLength();
-        gc1.setFill(ship.getNavireColor());
+        gc1.setFill(ColorFonts.colorList[ship.getNavireColor()]);
         int margin=-3;
         double width=gapX-5;
         double height=gapY-5;
@@ -303,7 +303,6 @@ public class Controller {
     }
     private static List<AbstractShip> createDefaultShips() {
         return Arrays.asList(new AbstractShip[] { new Destroyer(), new Submarine(), new BattleShip(), new AircraftCarrier() });
-//        return Arrays.asList(new AbstractShip[] { new Destroyer() });
     }
 
     private boolean updateScore() {
