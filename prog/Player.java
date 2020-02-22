@@ -1,6 +1,9 @@
+package prog;
+
 import java.io.Serializable;
 import java.util.List;
 import Ships.AbstractShip;
+import Ships.Orientation;
 
 public class Player implements Serializable{
     /* **
@@ -82,11 +85,35 @@ public class Player implements Serializable{
         return hit;
     }
 
+    public Hit attack(int x, int y) {
+        Hit hit = null;
+        if(x<0 || x>board.getSize()-1 || y<0 || y>board.getSize()-1)
+            return hit;
+        hit=opponentBoard.sendHit(x,y);
+        board.setHit(hit!=Hit.MISS,x,y);
+        return hit;
+    }
+    public boolean putship(AbstractShip ship, int x, int y){
+        board.putShip(ship,x,y);
+        return board.setDone;
+    }
     public AbstractShip[] getShips() {
         return ships;
     }
 
     public void setShips(AbstractShip[] ships) {
         this.ships = ships;
+    }
+    public void setDestroyedCount(int count){
+        destroyedCount=count;
+    }
+    public void setLose(boolean lose){
+        this.lose=lose;
+    }
+    public boolean getLoss(){
+        return lose;
+    }
+    public Board getBoard(){
+        return board;
     }
 }

@@ -1,3 +1,5 @@
+package prog;
+
 import Ships.AbstractShip;
 import Ships.Orientation;
 
@@ -10,14 +12,14 @@ public class Board implements IBoard, Serializable {
     private int length;
     public boolean setDone;
 
-    Board(String nom){
+    public Board(String nom){
         setDone=false;
         this.nom=nom;
-        length=2;
+        length=10;
         chessBoard=new ShipState[length][length];
         attack=new Hit[length][length];
     }
-    Board(String nom, int len){
+    public Board(String nom, int len){
         setDone=false;
         this.nom=nom;
         length=len;

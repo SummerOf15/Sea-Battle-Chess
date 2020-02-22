@@ -1,4 +1,7 @@
+package prog;
+
 import Ships.*;
+import prog.Player;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -178,7 +181,7 @@ public class Game {
     }
 
     private static List<AbstractShip> createDefaultShips() {
-//        return Arrays.asList(new AbstractShip[] { new Destroyer(), new Submarine(), new BattleShip(), new AircraftCarrier() });
-        return Arrays.asList(new AbstractShip[] { new Destroyer() });
+        return Arrays.asList(new AbstractShip[] { new Destroyer(), new Submarine(), new BattleShip(), new AircraftCarrier() });
+//        return Arrays.asList(new AbstractShip[] { new Destroyer() });
     }
 }

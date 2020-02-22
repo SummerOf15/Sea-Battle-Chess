@@ -1,4 +1,7 @@
+package prog;
+
 import Ships.AbstractShip;
+import prog.ColorFonts;
 
 import java.io.Serializable;
 
@@ -27,7 +30,7 @@ public class ShipState implements Serializable {
     public String toString(){
         String s;
         if(struck)
-            s=ColorFonts.ANSI_RED+ship.getNavireType().toString()+ColorFonts.ANSI_RESET;
+            s= ColorFonts.ANSI_RED+ship.getNavireType().toString()+ColorFonts.ANSI_RESET;
         else
             s=ship.getNavireType().toString();
         return s;

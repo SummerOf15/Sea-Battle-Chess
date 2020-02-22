@@ -1,4 +1,7 @@
+package prog;
+
 import Ships.*;
+import prog.IBoard;
 
 import java.io.Serializable;
 import java.util.*;

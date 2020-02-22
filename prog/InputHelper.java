@@ -1,3 +1,5 @@
+package prog;
+
 import Ships.Orientation;
 
 import java.util.Arrays;

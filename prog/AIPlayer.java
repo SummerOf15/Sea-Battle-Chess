@@ -1,6 +1,9 @@
+package prog;
+
 import java.io.Serializable;
 import java.util.List;
 import Ships.*;
+import prog.Player;
 
 public class AIPlayer extends Player {
     /*
