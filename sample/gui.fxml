@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.08793969849246232" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+  <items>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Game">
+            <items>
+              <MenuItem fx:id="onePlayer" mnemonicParsing="false" text="startGame" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="mAbout" mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.48327759197324416" prefHeight="160.0" prefWidth="200.0">
+        <items>
+            <Canvas fx:id="canvas1" height="300.0" width="300.0" />
+            <Canvas fx:id="canvas2" height="300.0" layoutX="10.0" layoutY="10.0" width="300.0" />
+        </items>
+      </SplitPane>
+  </items>
+</SplitPane>
